@@ -1,0 +1,24 @@
+name: Nightly Browser Adapters
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-tests:
+    name: Browser Adapter Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev,browser]"
+      - run: playwright install chromium
+      - run: pytest tests/browser/ -v --tb=short -m browser
+        env:
+          DATABASE_URL: "sqlite:///test.db"

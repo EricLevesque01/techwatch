@@ -1,0 +1,39 @@
+name: Source Adapter Request
+description: Request support for a new data source
+title: "[Source]: "
+labels: ["source-adapter"]
+body:
+  - type: input
+    id: source_name
+    attributes:
+      label: Source name
+      placeholder: "e.g., Swappa, Back Market, Amazon"
+    validations:
+      required: true
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: Data access method
+      options:
+        - Official API
+        - Structured data (JSON-LD)
+        - HTML scraping (requires legal review)
+    validations:
+      required: true
+  - type: textarea
+    id: api_docs
+    attributes:
+      label: API documentation URL
+      description: Link to official API docs if available
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case
+      description: What products/conditions does this source cover?
+    validations:
+      required: true
+  - type: textarea
+    id: compliance
+    attributes:
+      label: Compliance notes
+      description: Any known rate limits, robots.txt restrictions, or terms of service considerations?
